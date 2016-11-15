@@ -55,9 +55,7 @@ int main()
    char sortParam;
    string names[MAX_EMPLOYEES];
    int salaries[MAX_EMPLOYEES];
-   names[0] = "Donald_Clinton";
-   names[1] = "Hillary_Trump";
-   int num = 2;
+   int num = 0;
    cout << fixed << showpoint << setprecision(2) << endl;
    cin >> command;
    while (cin)
@@ -67,7 +65,7 @@ int main()
          //add
       }
 
-      if (command == 'D')
+      else if (command == 'D')
       {
          cin >> nameParam;
          if (Delete(names, salaries, num, nameParam))
@@ -76,13 +74,13 @@ int main()
             cout << nameParam << " not removed. Doesn't exist in the"
             << " company." << endl;
       }
-      
-      if (command == 'P')
+
+      else if (command == 'P')
       {
          //print
       }
 
-      if (command == 'S')
+      else if (command == 'S')
       {
          cin >> sortParam;
          if (sortParam == 'N')
@@ -94,20 +92,24 @@ int main()
 
       }
 
-      if (command == 'R')
+      else if (command == 'R')
       {
          cin >> salaryParam;
          if (GiveRaise(salaries, num, salaryParam))
-            cout << "Gave raise";
+            cout << "A raise of " << salaryParam << "was given to all"
+            << endl;
          else
-            cout << "didn't give raise";
+            cout << "Couldn't give raise, no employees";
 
       }
 
-      if (command == 'V')
+      else if (command == 'V')
       {
          //average
       }
+
+      else
+         cout << "Bad command!" << endl;
       cin >> command;
    }
 
