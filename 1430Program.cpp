@@ -42,6 +42,8 @@ const int MAX_EMPLOYEES = 5;
 const int NAME_SPACING = 20;
 
 int Find(const string names[], int num, string name);
+bool Delete(string names[], int salaries[], int num, string name);
+bool SalarySort(string names[], int salaries, int num);
 
 int main()
 {
@@ -51,6 +53,9 @@ int main()
    char sortParam;
    string names[MAX_EMPLOYEES];
    int salaries[MAX_EMPLOYEES];
+   names[0] = "Donald_Clinton";
+   names[1] = "Hillary_Trump";
+   int num = 2;
    cout << fixed << showpoint << setprecision(2) << endl;
    cin >> command;
    while (cin)
@@ -62,7 +67,12 @@ int main()
 
       if (command == 'D')
       {
-         //delete
+         cin >> nameParam;
+         if (Delete(names, salaries, num, nameParam))
+            cout << nameParam << " removed from the company." << endl;
+         else
+            cout << nameParam << " not removed. Doesn't exist in the"
+            << " company." << endl;
       }
       
       if (command == 'P')
@@ -72,7 +82,13 @@ int main()
 
       if (command == 'S')
       {
-         //sort
+         cin >> sortParam;
+         if (sortParam == 'N')
+            int a;
+         else
+            if(SalarySort(names, salaries, num))
+
+
       }
 
       if (command == 'R')
@@ -92,8 +108,33 @@ int main()
 
 int Find(const string names[], int num, string name)
 {
+   int index = -1;
    for (int i = 0; i < num; i++)
       if (names[i] == name)
-         return i;
-   return -1;
+      {
+         index = i;
+      }
+   return index;
+}
+
+bool Delete(string names[], int salaries[], int num, string name)
+{
+   int index = Find(names, num, name);
+   if (index >= 0)
+   {
+      names[index] = names[num - 1];
+      salaries[index] = salaries[num - 1];
+      num -= 1;
+      return true;
+   }
+   else
+      return false;
+}
+
+bool SalarySort(string names[], int salaries[], int num)
+{
+   int min = salaries[0];
+   for (int i = 0; i < num; i++)
+      if (salaries[i] < min)
+         min = salaries[i];
 }
