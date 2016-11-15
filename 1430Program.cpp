@@ -43,7 +43,9 @@ const int NAME_SPACING = 20;
 
 int Find(const string names[], int num, string name);
 bool Delete(string names[], int salaries[], int num, string name);
-bool SalarySort(string names[], int salaries, int num);
+bool SalarySort(string names[], int salaries[], int num);
+bool GiveRaise(int salaries[], int num, int raiseAmount);
+
 
 int main()
 {
@@ -84,16 +86,22 @@ int main()
       {
          cin >> sortParam;
          if (sortParam == 'N')
-            int a;
+            int a; // placeholder - delete and replace wit actual code
+            //sort by name
          else
-            if(SalarySort(names, salaries, num))
-
+            if (SalarySort(names, salaries, num))
+               int a;
 
       }
 
       if (command == 'R')
       {
-         //raise
+         cin >> salaryParam;
+         if (GiveRaise(salaries, num, salaryParam))
+            cout << "Gave raise";
+         else
+            cout << "didn't give raise";
+
       }
 
       if (command == 'V')
@@ -131,10 +139,24 @@ bool Delete(string names[], int salaries[], int num, string name)
       return false;
 }
 
+
+//fix later
 bool SalarySort(string names[], int salaries[], int num)
 {
-   int min = salaries[0];
-   for (int i = 0; i < num; i++)
-      if (salaries[i] < min)
+   int min = 0;
+   for (int i = 1; i < num; i++)
+      if (salaries[i] < salaries[min])
          min = salaries[i];
+   return true;
+}
+
+bool GiveRaise(int salaries[], int num, int raiseAmount)
+{
+   if (num > 0)
+   {
+      for (int i = 0; i < num; i++)
+         salaries[i] += raiseAmount;
+      return true;
+   }
+   return false;
 }
