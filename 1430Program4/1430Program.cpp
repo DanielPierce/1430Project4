@@ -170,8 +170,14 @@ void SortNames(string names[], int salaries[], int num)
 // Add - Jon
 bool Add(string names[], int salaries[], int & numNames, string name)
 {
-
-   return false;
+   if (numNames != MAX_EMPLOYEES)
+   {
+      names[numNames] = name;
+      return true;
+      numNames++;
+   }
+   else
+      return false;
 }
 // Print - Jon
 void Print(const string names[], const int salaries[], int numNames)
