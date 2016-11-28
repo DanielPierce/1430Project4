@@ -32,12 +32,12 @@ const int NAME_SPACING = 20;
 
 int Find(const string names[], int num, string name);
 bool Delete(string names[], int salaries[], int num, string name);
-void SortSal(int salaries[], int num);
-void SortNames(string names[], int num);
+void SortSalary(string names[], int salaries[], int num);
+void SortNames(string names[], int salaries[], int num);
 bool GiveRaise(int salaries[], int num, int raiseAmount);
-bool Add(string names[], int & numNames, string name);
+bool Add(string names[], int salaries[], int & numNames, string name);
 void Print(const string names[], const int salaries[], int numNames);
-int Average(int salaries[]);
+void Average(const int salaries[], int numNames);
 
 // Main - Danny
 // Main is too long. It's 55 lines, so it needs to be shortened or split
@@ -141,7 +141,7 @@ bool GiveRaise(int salaries[], int num, int raiseAmount)
 // SortSal - Danny
 // Program description says use the template from page 530.
 // It's a void type, since it will sort every time it is called.
-void SortSalary(int salaries[], int num)
+void SortSalary(string names[], int salaries[], int num)
 {
    int min = 0;
    for (int i = 1; i < num; i++)
@@ -149,24 +149,28 @@ void SortSalary(int salaries[], int num)
          min = salaries[i];
 }
 // SortNames - Jon
-void SortNames(string names[], int num)
+void SortNames(string names[], int salaries[], int num)
 {
    string temp;
-   int index, mindex;
+   int index, mindex, tempSal;
    for (int count = 0; count < num - 1; count++)
    {
       mindex = count;
       for (index = count + 1; index < num; index++)
          if (names[index] < names[mindex])
             mindex = index;
+      tempSal = salaries[index];
       temp = names[index];
+      salaries[mindex] = salaries[count];
       names[mindex] = names[count];
+      salaries[count] = tempSal;
       names[count] = temp;
    }
 }
 // Add - Jon
-bool Add(string names[], int & numNames, string name)
+bool Add(string names[], int salaries[], int & numNames, string name)
 {
+
    return false;
 }
 // Print - Jon
@@ -178,9 +182,15 @@ void Print(const string names[], const int salaries[], int numNames)
       << salaries[i] << endl;
 }
 // Average - Jon
-int Average(int salaries[])
+void Average(const int salaries[], int numNames)
 {
-   return 0;
+   int sum = 0;
+   for (int i = 0; i < numNames - 1; i++)
+      sum = salaries[i] + sum;
+   if (sum > 0)
+      cout << "The average salary is: " << sum << "." << endl;
+   else
+      cout << "No average." << endl;
 }
 
 
